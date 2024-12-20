@@ -60,11 +60,14 @@ class GetPolicy(object):
 # run simulation
 class Environment(object):
 
-    def __init__(self, stateSpace, goal, trap, block):
+    def __init__(self, stateSpace, goal, trap, block, goalReward, trapReward, navigationCost):
         self.stateSpace=stateSpace
         self.goal=goal
         self.trap=trap
         self.block=block
+        self.goalReward=goalReward
+        self.trapReward=trapReward
+        self.navigationCost=navigationCost
 
     def actionSpaceFunction(self, s):
         actions = {
@@ -86,13 +89,13 @@ class Environment(object):
 
     def rewardFunction(self, s, a, sPrime):
         if sPrime == self.goal:
-            return 5
+            return self.goalReward
         elif sPrime == self.trap:
-            return -10
+            return self.trapReward
         elif sPrime == self.block:
             return 0
         else:
-            return -1
+            return self.navigationCost
         
 class Agent(object):
     def __init__(self, start):
@@ -142,7 +145,11 @@ if __name__ == "__main__":
     block = [(1,1), (0,1)]
     start = (0,0)
 
-    environment = Environment(stateSpace, goal, trap, block)
+    goalReward = 5
+    trapReward = -10
+    navigationCost = -1
+
+    environment = Environment(stateSpace, goal, trap, block, goalReward, trapReward, navigationCost)
     agent = Agent(start)
 
     gamma = 0.9
