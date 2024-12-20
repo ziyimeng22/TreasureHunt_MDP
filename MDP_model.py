@@ -2,7 +2,7 @@ import numpy as np
 import random
 import time
 
-# class BellmanUpdate
+# MDP Solver
 class BellmanUpdate(object):
 
     def __init__(self, stateSpace, actionSpaceFunction, transitionFunction, rewardFunction, gamma):
@@ -19,7 +19,6 @@ class BellmanUpdate(object):
         print(Vs)
         return Vs   # maximum expected value (over all actions) for a given state s
 
-# class ValueIteration
 class ValueIteration(object):
 
     def __init__(self, stateSpace, theta, bellmanUpdate):
@@ -38,7 +37,6 @@ class ValueIteration(object):
         print(V)
         return V   # optimal value function for all states
 
-# class GetPolicy
 class GetPolicy(object):
 
     def __init__(self, stateSpace, actionSpaceFunction, transitionFunction, rewardFunction, gamma, V, roundingTolerance):
@@ -60,7 +58,6 @@ class GetPolicy(object):
 
 
 # run simulation
-
 class Environment(object):
 
     def __init__(self, stateSpace, goal, trap, block):
